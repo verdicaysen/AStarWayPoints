@@ -88,6 +88,7 @@ public class Graph
             if(thisNode.getId() == endId)
 
             {
+                ReconstructPath(start, end);
                 return true;
             }
 
@@ -140,6 +141,23 @@ public class Graph
 
     }
 
+    public void ReconstructPath(Node startId, Node endId)
+    
+    {
+        pathList.Clear();
+        pathList.Add(endId);
+
+        var p = endId.cameFrom;
+        while(p != startId && p != null)
+
+        {
+            pathList.Insert(0, p);
+            p = p.cameFrom;
+        }
+
+        pathList.Insert(0, startId);
+
+    }
 
     //Heuristic determinations. Goals and costs - determining the best way forward.
     float distance(Node a, Node b)
